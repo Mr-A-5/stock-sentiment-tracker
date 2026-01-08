@@ -9,9 +9,22 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.36.5",
+    "@headlessui/react": "^2.2.9",
+    "@huggingface/inference": "^4.13.5",
+    "@massive.com/client-js": "^10.1.0",
+    "@supabase-js/source": "github:supabase/supabase-js",
+    "@supabase/supabase-js": "^2.89.0",
+    "axios": "^1.13.2",
+    "finnhub": "^2.0.12",
+    "flowbite": "^4.0.1",
+    "flowbite-react": "^0.12.16",
     "next": "16.1.1",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-icons": "^5.5.0",
+    "recharts": "^3.6.0",
+    "supabase": "^2.72.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
