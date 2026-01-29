@@ -4,6 +4,13 @@ import { getUserArticles } from "@/app/functions/articles";
 import StrikePrices from "../molecules/StrikePrices";
 import { getOptionData } from "@/app/functions/optionData";
 import NewsCarousel from "../molecules/NewsCarousel";
+import en from "@/messages/en.json";
+import es from "@/messages/es.json";
+
+const locales: Record<string, typeof en> = {
+  en,
+  es,
+};
 
 type service = {
   service: string;
@@ -14,12 +21,14 @@ type ServicesDashboardProps = {
   company: string;
   company_Id: string;
   services: service[];
+  locale: string;
 };
 
 export default async function ServicesDashboard({
   company,
   company_Id,
   services,
+  locale,
 }: ServicesDashboardProps) {
   const articles = await getUserArticles(company_Id);
   let positive = 0;
@@ -53,13 +62,13 @@ export default async function ServicesDashboard({
         lg:flex-row"
         >
           {servicesMap["Articles Sentiment Graph"] && (
-            <SentimentGraph data={data} />
+            <SentimentGraph data={data} locale={locale} />
           )}
           {servicesMap["Most Bought Strikes"] && (
-            <StrikePrices companyData={companyData} />
+            <StrikePrices companyData={companyData} locale={locale} />
           )}
           {servicesMap["Market Status"] && (
-            <MarketStatus volume={companyData.volume} />
+            <MarketStatus volume={companyData.volume} locale={locale} />
           )}
         </div>
         <div
@@ -68,7 +77,7 @@ export default async function ServicesDashboard({
         lg:flex-row"
         >
           {servicesMap["Articles Sentiment"] && !(articles.length === 0) && (
-            <NewsCarousel articles={articles} />
+            <NewsCarousel articles={articles} locale={locale} />
           )}
         </div>
       </div>

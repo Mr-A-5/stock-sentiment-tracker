@@ -1,0 +1,61 @@
+{
+  "Home": {
+    "Hero": "Automate The Busy Work Of Trading",
+    "HeroSubTitle": "Track sentiment, monitor options, and request custom trading tools all in one place.",
+    "Text": "We provide on demand automation tools designed to simplify trading workflows. Our platform helps traders eliminate repetitive tasks by offering services such as stock sentiment analysis, option contract price tracking, and other data-driven tools for specific companies. Users can select the services they need, track the assets they care about, and receive automated insights without manual effort. If a service isn’t available yet, users can request custom tools through a simple form helping shape future features. Our goal is to make trading preparation and analysis faster, clearer, and more efficient. translate this to spanish please"
+  },
+  "NavBar": {
+    "Dashboard": "Dashboard",
+    "Demo": "Demo",
+    "ContactUs": "Contact Us",
+    "Request": "Request Services"
+  },
+  "Services": {
+    "Title": "Services",
+    "Market Status": "Market Status",
+    "Articles Sentiment Graph": "Articles Sentiment Graph",
+    "Articles Sentiment": "Articles Sentiment",
+    "Most Bought Strikes": "Most Bought Strikes",
+    "Add Service": "Add Service"
+  },
+  "Sentiment Graph": {
+    "Title": "Sentiment Graph",
+    "Description": "This graph illustrates the sentiment analysis of articles related to the selected company. It categorizes sentiments into Positive, Neutral, and Negative, providing insights into public perception. It uses a the Hugging Face Model 'ProsusAI/finbert' for classification."
+  },
+  "Most Bought Strikes": {
+    "Title": "Most Bought Strikes",
+    "Description": "This section displays the strikes prices with the highest purchase volume for options related to the selected company. It provides insights into market trends and investor preferences based on recent trading activity."
+  },
+  "Articles Sentiment": {
+    "Title": "Stock News with Sentiments",
+    "Description": "This carousel showcases the latest news articles related to the selected company. They are colored based on their sentiment analysis: green for positive sentiment, red for negative sentiment, and gray for neutral sentiment. This feature helps users quickly gauge the overall news sentiment surrounding the company. It uses a the Hugging Face Model 'ProsusAI/finbert' for classification."
+  },
+  "Market Status": {
+    "Title": "Market Status",
+    "Description": "This section provides relevant information about the current market status on the short term. A bull icon indicates a positive market trend, while a bear icon signifies a negative trend. "
+  },
+  "ContactUS": {
+    "Status": "Your message was sent successfully!",
+    "Title": "Contact Us",
+    "Name": "Name",
+    "Email": "Email",
+    "Phone Number": "Phone Number",
+    "Description": "Description",
+    "Submit": "Submit"
+  },
+  "Request Services": {
+    "Status": "Your request was sent successfully!",
+    "Title": "Request Services",
+    "Name": "Name",
+    "Email": "Email",
+    "Submit": "Submit",
+    "Add": "Select another stock",
+    "Select": "Select a stock",
+    "SubTitle": "Companies and Services"
+  },
+  "HomeButtons": {
+    "Sign In": "Sign in",
+    "Sign up": "Sign up",
+    "Dash": "Dashboard"
+  }
+}

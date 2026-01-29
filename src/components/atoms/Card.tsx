@@ -19,8 +19,8 @@ const heights: Record<sizes, string> = {
 };
 const widths: Record<sizes, string> = {
   sm: "sm:w-70",
-  md: "sm:w-7/10 sm:max-w-7/10 md:w-6/10 md:max-w-6/10 lg:w-1/3 lg:max-w-1/3",
-  lg: "sm:w-145",
+  md: "sm:w-7/10 sm:max-w-7/10 md:w-8/10 md:max-w-8/10 lg:w-1/3 lg:max-w-1/3",
+  lg: "sm:w-7/10 sm:max-w-7/10 md:max-w-8/10 md:w-8/10 lg:max-w-1/2 lg:w-1/2",
   xl: "sm:w-full",
 };
 
@@ -38,10 +38,17 @@ export default function Card({
         "p-1 " + className + " " + heights[height] + " " + widths[width]
       }
     >
-      <div className={"bg-white flex flex-col rounded-xl h-full w-full"}>
+      <div className={"bg-white flex flex-col rounded-xl h-full"}>
         <div className="items-center px-4 p-4 h-fit">
           <div className="pb-2 boder-b-5 flex flex-row justify-end w-full items-center border-b-5">
-            <h1 className="text-xl font-extrabold w-full">{title}</h1>
+            <h1
+              className=" font-extrabold w-full
+            lg:text-lg
+            xl:text-xl
+            "
+            >
+              {title}
+            </h1>
             {description ? (
               <Tooltip content={description} className="w-60">
                 <IoMdInformationCircleOutline

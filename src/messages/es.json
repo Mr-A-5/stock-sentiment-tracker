@@ -1,0 +1,62 @@
+{
+  "Home": {
+    "Hero": "Automatiza las tareas repetitivas del trading",
+    "HeroSubTitle": "Sigue el sentimiento del mercado, monitorea opciones y solicita herramientas de trading personalizadas, todo en un solo lugar.",
+    "Text": "Proporcionamos herramientas de automatización bajo demanda diseñadas para simplificar los flujos de trabajo de trading. Nuestra plataforma ayuda a los traders a eliminar tareas repetitivas ofreciendo servicios como análisis de sentimiento de acciones, seguimiento de precios de contratos de opciones y otras herramientas basadas en datos para empresas específicas. Los usuarios pueden seleccionar los servicios que necesitan, seguir los activos que les interesan y recibir información automatizada sin esfuerzo manual. Si un servicio aún no está disponible, los usuarios pueden solicitar herramientas personalizadas mediante un formulario sencillo que ayuda a definir futuras funciones. Nuestro objetivo es hacer que la preparación y el análisis del trading sean más rápidos, claros y eficientes."
+  },
+  "Demo": {},
+  "NavBar": {
+    "Dashboard": "Panel",
+    "Demo": "Demo",
+    "ContactUs": "Contactenos",
+    "Request": "Obtenga Servicios"
+  },
+  "Services": {
+    "Title": "Servicios",
+    "Market Status": "Estatus del Mercado",
+    "Articles Sentiment Graph": "Grafico de los Articulos",
+    "Articles Sentiment": "Articulos con Sentimiento",
+    "Most Bought Strikes": "Strikes mas comprados",
+    "Add Service": "Obtener Servicio"
+  },
+  "Sentiment Graph": {
+    "Title": "Grafico de los Articulos",
+    "Description": "Este gráfico muestra el análisis de sentimiento de artículos relacionados con la empresa seleccionada. Clasifica los sentimientos en Positivo, Neutral y Negativo, proporcionando información sobre la percepción pública. Utiliza el modelo de Hugging Face ‘ProsusAI/finbert’ para la clasificación."
+  },
+  "Most Bought Strikes": {
+    "Title": "Strikes mas comprados",
+    "Description": "Esta sección muestra los precios de ejercicio con el mayor volumen de compra para las opciones relacionadas con la empresa seleccionada. Proporciona información sobre las tendencias del mercado y las preferencias de los inversionistas basadas en la actividad reciente de negociación."
+  },
+  "Articles Sentiment": {
+    "Title": "Articulos con Sentimiento",
+    "Description": "Este carrusel muestra los últimos artículos de noticias relacionados con la empresa seleccionada. Están coloreados según su análisis de sentimiento: verde para sentimiento positivo, rojo para negativo y gris para neutral. Esta función ayuda a los usuarios a evaluar rápidamente el sentimiento general de las noticias sobre la empresa. Utiliza el modelo de Hugging Face ‘ProsusAI/finbert’ para la clasificación"
+  },
+  "Market Status": {
+    "Title": "Estatus del Mercado",
+    "Description": "Esta sección proporciona información relevante sobre el estado actual del mercado a corto plazo. Un ícono de toro indica una tendencia positiva del mercado, mientras que un ícono de oso señala una tendencia negativa."
+  },
+  "ContactUS": {
+    "Status": "¡Tu mensaje se envió con éxito!",
+    "Title": "Contáctanos",
+    "Name": "Nombre",
+    "Email": "Correo electrónico",
+    "Phone Number": "Número de teléfono",
+    "Description": "Descripción",
+    "Submit": "Enviar"
+  },
+  "Request Services": {
+    "Status": "¡Tu mensaje se envió con éxito!",
+    "Title": "Obtenga Servicios",
+    "Name": "Nombre",
+    "Email": "Correo electrónico",
+    "Submit": "Enviar",
+    "SubTitle": "Compañías y Servicios",
+    "Add": "Agregar otra compañía",
+    "Select": "Seleccione una compañía"
+  },
+  "HomeButtons": {
+    "Sign In": "Iniciar Sesion",
+    "Sign up": "Registrarse",
+    "Dash": "Panel"
+  }
+}

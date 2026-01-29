@@ -4,14 +4,21 @@ import ServicesMenuClient from "@/components/organism/ServicesMenuClient";
 import Link from "next/link";
 import { CiCirclePlus } from "react-icons/ci";
 
-export default async function page() {
+type PageProps = {
+  params: {
+    locale: string;
+  };
+};
+
+export default async function page({ params }: PageProps) {
+  const { locale } = await params;
   const serviceMap = await getUserServices();
   return (
-    <div className="flex h-fit min-h-full align-start rounded-xl">
+    <div className="bg-red-transparent w-full flex h-fit min-h-full align-start rounded-xl ">
       {serviceMap.length !== 0 ? (
         <>
-          <ServicesMenuClient servicesByCompany={serviceMap} />
-          <div className="bg-white p-2 pt-0 flex flex-col w-full rounded-b-xl gap-2 ">
+          <ServicesMenuClient servicesByCompany={serviceMap} locale={locale} />
+          <div className="bg-white flex flex-1 flex-col overflow-hidden rounded-b-xl p-2 pt-0 gap-2">
             {serviceMap.map(({ company, services, company_id }) => (
               <div
                 key={company + services}
@@ -21,6 +28,7 @@ export default async function page() {
                   company={company}
                   company_Id={company_id}
                   services={services}
+                  locale={locale}
                 />
               </div>
             ))}

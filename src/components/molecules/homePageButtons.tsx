@@ -2,20 +2,36 @@
 import Button from "@/components/atoms/Button";
 import { useUser, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import en from "@/messages/en.json";
+import es from "@/messages/es.json";
 
-export function HomePageButtons() {
+const locales: Record<string, typeof en> = {
+  en,
+  es,
+};
+
+type PageProps = {
+  params: {
+    locale: string;
+  };
+};
+
+export function HomePageButtons({ locale }: { locale: string }) {
   const { isSignedIn } = useUser();
   const router = useRouter();
+
+  const text = locales[locale] ?? en;
   return (
-    <div className="flex flex-row gap-3 pt-5 justify-center">
+    <div className="flex flex-row gap-3 pt-5 items-center justify-center">
       {isSignedIn ? (
         <>
-          <button
-            className="px-4 py-2 bg-primary text-white rounded"
-            onClick={() => router.push("/dashboard")}
+          <Button
+            color="primary"
+            size="base"
+            onClick={() => router.push(`${locale}/dashboard`)}
           >
-            Go to Dashboard
-          </button>
+            {text.HomeButtons.Dash}
+          </Button>
         </>
       ) : (
         <>
@@ -27,7 +43,7 @@ export function HomePageButtons() {
             fallbackRedirectUrl="/dashboard"
           >
             <Button color="primary" size="base">
-              Sign Up
+              {text.HomeButtons["Sign up"]}
             </Button>
           </SignUpButton>
 
@@ -39,7 +55,7 @@ export function HomePageButtons() {
             fallbackRedirectUrl="/dashboard"
           >
             <Button color="secondary" size="base">
-              Sign In
+              {text.HomeButtons["Sign In"]}
             </Button>
           </SignInButton>
         </>

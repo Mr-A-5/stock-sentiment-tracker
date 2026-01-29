@@ -1,6 +1,6 @@
 "use server";
 
-import { supabaseClient } from "../../providers/adminSupabaseClient";
+import { supabaseClient } from "../../../providers/adminSupabaseClient";
 
 export async function syncUserToSupabase(
   userId: string,

@@ -1,5 +1,4 @@
 import { supabaseClient } from "@/providers/adminSupabaseClient";
-import { clerkAuthentication } from "./clerkAuth";
 
 export async function getOptionData(
   ticket: string,

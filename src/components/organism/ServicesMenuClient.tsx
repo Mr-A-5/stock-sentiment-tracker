@@ -7,8 +7,10 @@ const ServicesMenu = dynamic(() => import("./ServicesMenu"), { ssr: false });
 
 export default function ServicesMenuClient({
   servicesByCompany,
+  locale,
 }: {
   servicesByCompany: servicesByCompany[];
+  locale: string;
 }) {
-  return <ServicesMenu servicesByCompany={servicesByCompany} />;
+  return <ServicesMenu servicesByCompany={servicesByCompany} locale={locale} />;
 }

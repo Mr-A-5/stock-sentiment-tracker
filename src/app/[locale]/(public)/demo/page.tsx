@@ -1,10 +1,10 @@
 import ServicesDashboard from "@/components/organism/ServicesDashboard";
 import ServicesMenuClient from "@/components/organism/ServicesMenuClient";
 
-type servicesByCompany = {
-  company: string;
-  company_id: string;
-  services: service[];
+type PageProps = {
+  params: {
+    locale: string;
+  };
 };
 
 type service = {
@@ -12,7 +12,15 @@ type service = {
   visible: boolean;
 };
 
-export default async function page() {
+type servicesByCompany = {
+  company: string;
+  company_id: string;
+  services: service[];
+};
+
+export default async function Page({ params }: PageProps) {
+  const { locale } = await params;
+
   const serviceList: servicesByCompany[] = [
     {
       company: "TSLA",
@@ -25,19 +33,22 @@ export default async function page() {
       ],
     },
   ];
+
   return (
-    <div className="bg-transparent flex h-fit min-h-full align-start rounded-xl">
-      <ServicesMenuClient servicesByCompany={serviceList} />
-      <div className=" bg-white flex flex-col w-full rounded-b-xl p-2 pt-0 gap-2">
+    <div className="bg-transparent flex h-fit min-h-full align-start rounded-xl w-full">
+      <ServicesMenuClient servicesByCompany={serviceList} locale={locale} />
+
+      <div className="bg-white flex flex-col flex-1 w-full rounded-b-xl p-2 pt-0 gap-2">
         {serviceList.map(({ company, services, company_id }) => (
           <div
-            key={company + services}
+            key={company}
             className="w-full rounded-br-xl bg-sent-gray rounded-b-xl p-4"
           >
             <ServicesDashboard
               company={company}
               company_Id={company_id}
               services={services}
+              locale={locale}
             />
           </div>
         ))}

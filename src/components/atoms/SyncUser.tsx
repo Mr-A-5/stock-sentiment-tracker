@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
-import { syncUserToSupabase } from "../../app/actions/syncUser";
+import { syncUserToSupabase } from "../../app/[locale]/actions/syncUser";
 
 export default function SyncUser() {
   const { user } = useUser();
@@ -12,7 +12,7 @@ export default function SyncUser() {
     syncUserToSupabase(
       user.id,
       user.emailAddresses[0].emailAddress,
-      user.fullName || ""
+      user.fullName || "",
     );
   }, [user]);
 

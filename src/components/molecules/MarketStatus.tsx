@@ -1,17 +1,31 @@
-import React from "react";
 import { GiChargingBull } from "react-icons/gi";
 import { GiBearHead } from "react-icons/gi";
 import Card from "../atoms/Card";
 import descriptions from "@/assets/descriptions";
+import en from "@/messages/en.json";
+import es from "@/messages/es.json";
 
-export function MarketStatus({ volume }: { volume: number }) {
+const locales: Record<string, typeof en> = {
+  en,
+  es,
+};
+
+export function MarketStatus({
+  volume,
+  locale,
+}: {
+  volume: number;
+  locale: string;
+}) {
+  const text = locales[locale] ?? en;
+
   return (
     <Card
-      title="Market Status"
+      title={text["Market Status"].Title}
       className=""
       height="md"
       width="md"
-      description={descriptions.marketStatus}
+      description={text["Market Status"].Description}
     >
       <div className="flex h-full justify-center items-center ">
         {volume > 0 ? (

@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs";
 import { supabaseClient } from "@/providers/adminSupabaseClient";
 
 type userServicesType = {

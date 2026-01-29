@@ -1,16 +1,19 @@
-import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+"use client";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 export function ClerkAvatar({}) {
   return (
-    <>
-      <SignedIn></SignedIn>
+    <div className="flex w-fit justify-center items-center px-1 md:px-3 py-1">
+      <SignedIn>
+        <UserButton></UserButton>
+      </SignedIn>
       <SignedOut>
         <SignInButton mode="modal">
-          <button className="px-3 py-1 rounded-lg bg-black text-white">
+          <button className="rounded-lg p-1 py-2 bg-black text-white cursor-pointer w-fit">
             Sign in
           </button>
         </SignInButton>
       </SignedOut>
-    </>
+    </div>
   );
 }

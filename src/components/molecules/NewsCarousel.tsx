@@ -1,23 +1,24 @@
+"use client";
 import { articlesTableStructure } from "@/providers/adminSupabaseClient";
 import Card from "../atoms/Card";
-import { Carousel as FlowBiteCarousel } from "flowbite-react";
 import Link from "next/link";
-import descriptions from "@/assets/descriptions";
+import en from "@/messages/en.json";
+import es from "@/messages/es.json";
+import { useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
+const locales: Record<string, typeof en> = {
+  en,
+  es,
+};
 
 type NewsCarouselProps = {
   articles: articlesTableStructure[];
+  locale: string;
 };
 
-export default function NewsCarousel({ articles }: NewsCarouselProps) {
-  function groupBy(array: articlesTableStructure[], size: number) {
-    const result = [];
-
-    for (let i = 0; i < array.length; i += size) {
-      result.push(array.slice(i, i + size));
-    }
-
-    return result;
-  }
+export default function NewsCarousel({ articles, locale }: NewsCarouselProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   function getSentimentColor(article: articlesTableStructure): string {
     const neutral_sentiment = 1 - article.pos_sentiment - article.neg_sentiment;
@@ -37,54 +38,84 @@ export default function NewsCarousel({ articles }: NewsCarouselProps) {
     return sentiment;
   }
 
-  const groupedArticles = groupBy(articles, 1);
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? articles.length - 1 : prevIndex - 1,
+    );
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === articles.length - 1 ? 0 : prevIndex + 1,
+    );
+  };
+
+  const text = locales[locale] ?? en;
+  const currentArticle = articles[currentIndex];
+
+  if (!currentArticle) return null;
 
   return (
     <Card
-      title="Stock News with Sentiments"
+      title={text["Articles Sentiment"].Title}
       height="lg"
-      width="md"
-      description={descriptions.NewsCarousel}
+      width="lg"
+      description={text["Articles Sentiment"].Description}
     >
-      <FlowBiteCarousel
-        indicators={false}
-        className="h-110 justify-center 
-        sm:h-120"
-      >
-        {groupedArticles.map((articles: articlesTableStructure[], key) => (
-          <div
-            key={key}
-            className="flex flex-row h-full pt-5 min-h-fit gap-x-4 w-full justify-center cursor-pointer pb-0
-            sm:pb-15"
-          >
-            {articles.map((article: articlesTableStructure) => (
-              <Link
-                key={article.id}
-                href={article.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block hover:-translate-y-2
-focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <div key={article.id} className="flex flex-col min-h-35 w-60 ">
-                  <h1
-                    className={`p-2 border-b-2 font-bold min-h-30 rounded-t-2xl border-3 ${getSentimentColor(article)}`}
-                  >
-                    {article.headline.length > 80
-                      ? article.headline.slice(0, 80) + "..."
-                      : article.headline}
-                  </h1>
-                  <p className="p-2 min-h-60 font-semibold border-3 border-t-0 rounded-2xl rounded-t-none">
-                    {article.summary.length > 180
-                      ? article.summary.slice(0, 180) + "..."
-                      : article.summary}
-                  </p>
-                </div>
-              </Link>
-            ))}
+      <div className="relative flex h-full w-full items-center justify-center pt-5 pb-5">
+        <button
+          onClick={goToPrevious}
+          className="absolute left-2 z-10 rounded-full bg-gray-300 p-2 hover:bg-gray-400 transition"
+          aria-label="Previous article"
+        >
+          <FaChevronLeft size={20} />
+        </button>
+
+        <Link
+          href={currentArticle.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block hover:-translate-y-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <div className="flex flex-col min-h-35 w-60">
+            <h1
+              className={`p-2 border-b-2 font-bold min-h-30 rounded-t-2xl border-3 ${getSentimentColor(currentArticle)}`}
+            >
+              {currentArticle.headline.length > 80
+                ? currentArticle.headline.slice(0, 80) + "..."
+                : currentArticle.headline}
+            </h1>
+            <p className="p-2 min-h-60 font-semibold border-3 border-t-0 rounded-2xl rounded-t-none">
+              {currentArticle.summary.length > 180
+                ? currentArticle.summary.slice(0, 180) + "..."
+                : currentArticle.summary}
+            </p>
           </div>
+        </Link>
+
+        {/* Right Arrow Button */}
+        <button
+          onClick={goToNext}
+          className="absolute right-2 z-10 rounded-full bg-gray-300 p-2 hover:bg-gray-400 transition"
+          aria-label="Next article"
+        >
+          <FaChevronRight size={20} />
+        </button>
+      </div>
+
+      {/* Indicator Dots */}
+      <div className="flex justify-center gap-2 pt-4 pb-2">
+        {articles.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`h-2 rounded-full transition ${
+              index === currentIndex ? "w-8 bg-blue-500" : "w-2 bg-gray-400"
+            }`}
+            aria-label={`Go to article ${index + 1}`}
+          />
         ))}
-      </FlowBiteCarousel>
+      </div>
     </Card>
   );
 }
