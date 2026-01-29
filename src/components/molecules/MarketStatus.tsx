@@ -1,7 +1,6 @@
 import { GiChargingBull } from "react-icons/gi";
 import { GiBearHead } from "react-icons/gi";
 import Card from "../atoms/Card";
-import descriptions from "@/assets/descriptions";
 import en from "@/messages/en.json";
 import es from "@/messages/es.json";
 
