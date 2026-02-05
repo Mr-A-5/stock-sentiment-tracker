@@ -1,0 +1,97 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "crons": [
+    {
+      "path": "/api/cleanArticles",
+      "schedule": "0 12 * * *"
+    },
+    {
+      "path": "/api/TSLA/articles",
+      "schedule": "5 12 * * *"
+    },
+    {
+      "path": "/api/TSLA/articlesSentiment",
+      "schedule": "10 12 * * *"
+    },
+    {
+      "path": "/api/TSLA/strikePrice",
+      "schedule": "10 12 * * *"
+    },
+
+    {
+      "path": "/api/AAPL/articles",
+      "schedule": "15 12 * * *"
+    },
+    {
+      "path": "/api/AAPL/articlesSentiment",
+      "schedule": "20 12 * * *"
+    },
+    {
+      "path": "/api/AAPl/strikePrice",
+      "schedule": "10 12 * * *"
+    },
+
+    {
+      "path": "/api/AMZN/articles",
+      "schedule": "25 12 * * *"
+    },
+    {
+      "path": "/api/AMZN/articlesSentiment",
+      "schedule": "30 12 * * *"
+    },
+    {
+      "path": "/api/AMZN/strikePrice",
+      "schedule": "10 12 * * *"
+    },
+
+    {
+      "path": "/api/TSLA/articles",
+      "schedule": "5 18 * * *"
+    },
+    {
+      "path": "/api/TSLA/articlesSentiment",
+      "schedule": "10 18 * * *"
+    },
+    {
+      "path": "/api/TSLA/strikePrice",
+      "schedule": "10 18 * * *"
+    },
+
+    {
+      "path": "/api/AAPL/articles",
+      "schedule": "15 18 * * *"
+    },
+    {
+      "path": "/api/AAPL/articlesSentiment",
+      "schedule": "20 18 * * *"
+    },
+    {
+      "path": "/api/AAPL/strikePrice",
+      "schedule": "10 18 * * *"
+    },
+
+    {
+      "path": "/api/AMZN/articles",
+      "schedule": "25 18 * * *"
+    },
+    {
+      "path": "/api/AMZN/articlesSentiment",
+      "schedule": "30 18 * * *"
+    },
+    {
+      "path": "/api/AMZN/strikePrice",
+      "schedule": "10 18 * * *"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/:path*",
+      "headers": [
+        {
+          "key": "Authorization",
+          "value": "Bearer ${CRON_SECRET}"
+        }
+      ]
+    }
+  ]
+}

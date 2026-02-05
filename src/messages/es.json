@@ -52,7 +52,8 @@
     "Submit": "Enviar",
     "SubTitle": "Compañías y Servicios",
     "Add": "Agregar otra compañía",
-    "Select": "Seleccione una compañía"
+    "Select": "Seleccione una compañía",
+    "allServices": "Su configuración actual abarca todos nuestros servicios ofrecidos."
   },
   "HomeButtons": {
     "Sign In": "Iniciar Sesion",

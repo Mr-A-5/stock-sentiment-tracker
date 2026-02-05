@@ -59,7 +59,7 @@ export default function NewsCarousel({ articles, locale }: NewsCarouselProps) {
     <Card
       title={text["Articles Sentiment"].Title}
       height="lg"
-      width="lg"
+      width="xl"
       description={text["Articles Sentiment"].Description}
     >
       <div className="relative flex h-full w-full items-center justify-center pt-5 pb-5">
@@ -93,7 +93,6 @@ export default function NewsCarousel({ articles, locale }: NewsCarouselProps) {
           </div>
         </Link>
 
-        {/* Right Arrow Button */}
         <button
           onClick={goToNext}
           className="absolute right-2 z-10 rounded-full bg-gray-300 p-2 hover:bg-gray-400 transition"
@@ -103,7 +102,6 @@ export default function NewsCarousel({ articles, locale }: NewsCarouselProps) {
         </button>
       </div>
 
-      {/* Indicator Dots */}
       <div className="flex justify-center gap-2 pt-4 pb-2">
         {articles.map((_, index) => (
           <button

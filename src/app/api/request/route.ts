@@ -22,12 +22,12 @@ export async function POST(req: Request) {
         row.service_ids.map((service_id) => ({
           user_id,
           company_id: row.company_id,
-          service_id,
+          service: service_id,
         })),
     );
 
     const { error } = await supabaseClient
-      .from("Requests")
+      .from("Services_by_User_Company")
       .insert(rowsToInsert);
 
     if (error) throw error;

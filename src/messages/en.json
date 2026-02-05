@@ -51,7 +51,8 @@
     "Submit": "Submit",
     "Add": "Select another stock",
     "Select": "Select a stock",
-    "SubTitle": "Companies and Services"
+    "SubTitle": "Companies and Services",
+    "allServices": "Your current setup encompasses all our offered services."
   },
   "HomeButtons": {
     "Sign In": "Sign in",

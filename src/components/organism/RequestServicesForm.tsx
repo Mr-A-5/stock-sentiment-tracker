@@ -27,10 +27,14 @@ type Service = {
 };
 
 type Props = {
+  servicesMap: Record<
+    string,
+    { Name: string; Services: { id: string; name: string }[] }
+  >;
   locale: string;
 };
 
-export default function RequestServicesForm({ locale }: Props) {
+export default function RequestServicesForm({ locale, servicesMap }: Props) {
   const text = locales[locale] ?? en;
   const { user, isLoaded, isSignedIn } = useUser();
   const [status, setStatus] = useState<{
@@ -42,31 +46,18 @@ export default function RequestServicesForm({ locale }: Props) {
     { companyId: null, serviceIds: [] },
   ]);
 
-  const [companies, setCompanies] = useState<Company[]>([]);
-  const [services, setServices] = useState<Service[]>([]);
-  const [loadingData, setLoadingData] = useState(true);
+  // Derive an array of companies with their services from the provided servicesMap prop
+  const companyServices = Object.entries(servicesMap ?? {}).map(
+    ([key, val]) => ({
+      companyId: Number(key),
+      name: val.Name,
+      services: (val.Services ?? []).map((s) => ({
+        id: Number(s.id),
+        name: s.name,
+      })),
+    }),
+  );
 
-  useEffect(() => {
-    async function loadData() {
-      try {
-        const [companiesRes, servicesRes] = await Promise.all([
-          fetch("/api/companies"),
-          fetch("/api/services"),
-        ]);
-
-        setCompanies(await companiesRes.json());
-        setServices(await servicesRes.json());
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoadingData(false);
-      }
-    }
-
-    loadData();
-  }, []);
-
-  if (!isLoaded || loadingData) return null;
   if (!isSignedIn || !user) return <p>Not signed in</p>;
 
   function updateCompany(rowIndex: number, companyId: number) {
@@ -188,53 +179,68 @@ export default function RequestServicesForm({ locale }: Props) {
               <Label className="text-xl px-3" color="gray">
                 {text["Request Services"].SubTitle}
               </Label>
-              {rows.map((row, index) => (
-                <div
-                  key={index}
-                  className="rounded-xl border bg-white p-4 mt-2"
-                >
-                  <Label>Stock</Label>
-                  <select
-                    className="mt-1 w-full rounded-lg border p-2"
-                    value={row.companyId ?? ""}
-                    onChange={(e) =>
-                      updateCompany(index, Number(e.target.value))
-                    }
+              {rows.map((row, index) => {
+                const selectedCompany = companyServices.find(
+                  (c) => c.companyId === row.companyId,
+                );
+
+                return (
+                  <div
+                    key={index}
+                    className="rounded-xl border bg-white p-4 mt-2"
                   >
-                    <option value="">{text["Request Services"].Select}</option>
-                    {companies.map((company) => (
-                      <option key={company.id} value={company.id}>
-                        {company.name}
+                    <Label>Stock</Label>
+                    <select
+                      className="mt-1 w-full rounded-lg border p-2"
+                      value={row.companyId ?? ""}
+                      onChange={(e) =>
+                        updateCompany(index, Number(e.target.value))
+                      }
+                    >
+                      <option value="">
+                        {text["Request Services"].Select}
                       </option>
-                    ))}
-                  </select>
-
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {services.map((service) => {
-                      const active = row.serviceIds.includes(service.id);
-
-                      return (
-                        <button
-                          key={service.id}
-                          type="button"
-                          onClick={() => toggleService(index, service.id)}
-                          className={`rounded-full px-3 py-1 text-sm transition ${
-                            active
-                              ? "bg-blue-600 text-white"
-                              : "bg-gray-200 hover:bg-gray-300"
-                          }`}
+                      {companyServices.map((company) => (
+                        <option
+                          key={company.companyId}
+                          value={company.companyId}
                         >
-                          {
-                            text.Services[
-                              service.service as keyof typeof text.Services
-                            ]
-                          }
-                        </button>
-                      );
-                    })}
+                          {company.name}
+                        </option>
+                      ))}
+                    </select>
+
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {selectedCompany?.services.length == 0 ? (
+                        <label
+                          className={`rounded-full px-3 py-1 text-sm transition1 bg-gray-200 hover:bg-gray-300`}
+                        >
+                          No additional services for this company are available
+                        </label>
+                      ) : (
+                        selectedCompany?.services.map((service) => {
+                          const active = row.serviceIds.includes(service.id);
+
+                          return (
+                            <button
+                              key={service.id}
+                              type="button"
+                              onClick={() => toggleService(index, service.id)}
+                              className={`rounded-full px-3 py-1 text-sm transition ${
+                                active
+                                  ? "bg-blue-600 text-white"
+                                  : "bg-gray-200 hover:bg-gray-300"
+                              }`}
+                            >
+                              {service.name}
+                            </button>
+                          );
+                        })
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
             <Button type="button" onClick={addRow} className="bg-sent-purple">
               {text["Request Services"].Add}

@@ -21,7 +21,7 @@ const widths: Record<sizes, string> = {
   sm: "sm:w-70",
   md: "sm:w-7/10 sm:max-w-7/10 md:w-8/10 md:max-w-8/10 lg:w-1/3 lg:max-w-1/3",
   lg: "sm:w-7/10 sm:max-w-7/10 md:max-w-8/10 md:w-8/10 lg:max-w-1/2 lg:w-1/2",
-  xl: "sm:w-full",
+  xl: "sm:w-7/10 sm:max-w-7/10 md:max-w-8/10 md:w-8/10 lg:max-w-1/2 lg:w-full",
 };
 
 export default function Card({

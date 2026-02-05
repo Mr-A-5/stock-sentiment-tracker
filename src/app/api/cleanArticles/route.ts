@@ -8,20 +8,11 @@ function getYesterdaysDate() {
   return yesterday.toISOString().split("T")[0];
 }
 
-export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ ticket: string }> },
-) {
-  const { ticket } = await params;
-  const { data: companyID, error: idError } = await supabaseClient
-    .from("Companies")
-    .select("id")
-    .eq("name", ticket);
-  if (idError || !companyID || companyID.length === 0) {
-    return NextResponse.json(
-      { error: "Company ID fetch error" },
-      { status: 500 },
-    );
+export async function GET(request: Request) {
+  const authHeader = request.headers.get("authorization");
+
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const yesterdayDate = getYesterdaysDate();
 

@@ -10,12 +10,6 @@ const locales: Record<string, typeof en> = {
   es,
 };
 
-type PageProps = {
-  params: {
-    locale: string;
-  };
-};
-
 export function HomePageButtons({ locale }: { locale: string }) {
   const { isSignedIn } = useUser();
   const router = useRouter();

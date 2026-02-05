@@ -41,7 +41,7 @@ export default async function page({ params }: PageProps) {
               No services have been added to your account yet. Please contact us
               to be able to add any services to your account.
             </p>
-            <Link href={"/requestService"}>
+            <Link href={`/${locale}/requestService`}>
               <CiCirclePlus size={50} className="text-sent-purple" />
             </Link>
           </div>

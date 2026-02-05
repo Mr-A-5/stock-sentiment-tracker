@@ -18,6 +18,11 @@ export async function GET(
   request: Request,
   { params }: { params: Promise<{ ticket: string }> },
 ) {
+  const authHeader = request.headers.get("authorization");
+
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const { ticket } = await params;
   const { data: companyID, error: idError } = await supabaseClient
     .from("Companies")
@@ -66,43 +71,5 @@ export async function GET(
       console.log("Error upserting articles without sentiments", upsertError);
     }
   });
-  const { data: articlesWoSentiment, error: sentimentError } =
-    await supabaseClient.from("Articles").select("*").is("pos_sentiment", null);
-
-  if (sentimentError) console.log("Sentiment Error: ", sentimentError);
-
-  await Promise.all(
-    articlesWoSentiment?.map(
-      async (articleWoSentiment: articlesTableStructure) => {
-        const sentiments: sentimentList = await HGclient.textClassification({
-          model: "ProsusAI/finbert",
-          inputs:
-            articleWoSentiment.headline + " - " + articleWoSentiment.summary,
-          provider: "hf-inference",
-        });
-
-        const positive =
-          sentiments.find((s) => s.label === "positive")?.score ?? 0;
-        const negative =
-          sentiments.find((s) => s.label === "negative")?.score ?? 0;
-
-        const { error } = await supabaseClient
-          .from("Articles")
-          .update({
-            pos_sentiment: positive,
-            neg_sentiment: negative,
-          })
-          .eq("id", articleWoSentiment.id);
-
-        if (error) {
-          console.error(
-            "Failed to update article",
-            articleWoSentiment.id,
-            error,
-          );
-        }
-      },
-    ) ?? [],
-  );
   return NextResponse.json({ articles });
 }

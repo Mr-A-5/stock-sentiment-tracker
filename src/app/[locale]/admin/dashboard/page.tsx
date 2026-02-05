@@ -1,3 +1,4 @@
+import { adminAuth } from "@/app/functions/adminAuth";
 import { getRequests } from "@/app/functions/requests";
 import Card from "@/components/atoms/Card";
 import RequestButtons from "@/components/molecules/RequestButtons";
@@ -41,6 +42,7 @@ function formatRequestsByUser(rows: RequestType[]): FormattedUserRequests[] {
 }
 
 export default async function Page() {
+  const userId = await adminAuth();
   const requests = await getRequests();
   const companyMap = new Map<string, string>();
 
