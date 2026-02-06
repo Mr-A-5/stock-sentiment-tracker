@@ -24,11 +24,11 @@ export default function Navbar({ locale }: { locale: string }) {
   ];
 
   return (
-    <div className="bg-white w-full rounded-t-2xl px-6 py-5 flex flex-row justify-between font-semibold">
-      <Link className="flex items-center" href="/">
+    <div className="bg-white w-full rounded-t-2xl px-4 sm:px-6 py-5 flex flex-row justify-between font-semibold">
+      <Link className="flex w-fit items-center" href="/">
         Easy Investing
       </Link>
-      <div className="flex flex-row w-fit items-center gap-2 lg:hidden">
+      <div className="flex flex-row w-fit items-center gap-1 sm:gap-2 lg:hidden">
         <ClerkAvatar />
         <LocaleSwitcher />
         <NavbarMenu links={links} />

@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   const payload = await req.text();
   const headerPayload = await headers();
 
-  const svix = new Webhook(process.env.CLERK_WEBHOOK_SECRET!);
+  const svix = new Webhook(process.env.CLERK_WEBHOOK_SECRET_CREATE!);
 
   let evt: {
     type: string;

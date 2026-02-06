@@ -24,11 +24,11 @@ export default function LocaleSwitcher() {
 
   return (
     <div
-      className="bg-sent-gray flex rounded-xl gap-1 p-1 px-2
-    md:gap-2 md:p-2 md:px-3"
+      className="bg-sent-gray flex rounded-lg gap-1 p-1 px-2
+    md:gap-2 md:p-2 md:px-3 text-xs sm:text-base"
     >
       <button
-        className={`px-1 md:px-2 py-1 rounded-lg ${
+        className={`px-1 md:px-2 py-2 rounded-lg ${
           currentLocale === "en" ? activeClass : inactiveClass
         }`}
         onClick={() => switchLocale("en")}

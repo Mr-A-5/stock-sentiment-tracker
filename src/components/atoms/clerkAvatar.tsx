@@ -9,7 +9,7 @@ export function ClerkAvatar({}) {
       </SignedIn>
       <SignedOut>
         <SignInButton mode="modal">
-          <button className="rounded-lg p-1 py-2 bg-black text-white cursor-pointer w-fit">
+          <button className="rounded-lg px-1 py-2 bg-black text-white cursor-pointer w-fit text-sm sm:text-base">
             Sign in
           </button>
         </SignInButton>
