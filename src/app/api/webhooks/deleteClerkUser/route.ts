@@ -23,8 +23,14 @@ export async function POST(req: Request) {
 
   if (evt.type === "user.deleted") {
     const clerkUserId = evt.data.id;
+    console.log(clerkUserId);
 
-    await supabaseClient.from("Users").delete().eq("id", clerkUserId);
+    const { data, error } = await supabaseClient
+      .from("Users")
+      .delete()
+      .eq("id", clerkUserId);
+    console.log(data);
+    console.error(error);
   }
 
   return NextResponse.json({ received: true });

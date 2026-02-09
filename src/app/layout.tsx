@@ -1,6 +1,6 @@
-import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { notoSans } from "./fonts";
+import ClerkProviderClient from "@/providers/ClerkProviderClient";
 
 export default function RootLayout({
   children,
@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <html className={notoSans.variable}>
       <body>
-        <ClerkProvider>{children}</ClerkProvider>
+        <ClerkProviderClient>{children}</ClerkProviderClient>
       </body>
     </html>
   );

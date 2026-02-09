@@ -2,6 +2,7 @@ import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { supabaseClient } from "@/providers/adminSupabaseClient";
+import { error } from "console";
 
 export async function POST(req: Request) {
   const payload = await req.text();
@@ -11,7 +12,12 @@ export async function POST(req: Request) {
 
   let evt: {
     type: string;
-    data: { id: string; first_name: string; last_name: string; email: string };
+    data: {
+      id: string;
+      first_name: string;
+      last_name: string;
+      email_addresses: [{ email_address: string }];
+    };
   };
 
   try {
@@ -26,15 +32,17 @@ export async function POST(req: Request) {
 
   if (evt.type === "user.created") {
     const clerkUserId = evt.data.id;
+    console.log(clerkUserId);
     const name = evt.data.first_name + " " + evt.data.last_name;
-    const email = evt.data.email;
+    console.log(name);
+    const email = evt.data.email_addresses[0].email_address;
 
-    await supabaseClient.from("Users").upsert({
+    const { data, error } = await supabaseClient.from("Users").insert({
       id: clerkUserId,
       email,
       name,
     });
   }
 
-  return NextResponse.json({ received: true });
+  return NextResponse.json({});
 }

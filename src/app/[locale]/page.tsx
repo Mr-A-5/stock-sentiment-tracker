@@ -42,9 +42,9 @@ export default async function Home({ params }: PageProps) {
         <HomePageButtons locale={locale} />
       </div>
       <img
-        src="/images/demo.png"
-        alt="EPS icon"
-        className="hidden sm:flex sm:col-start-8 sm:col-end-12 h-full max-h-65"
+        src="/images/bull.png"
+        alt="Bull icon"
+        className="hidden sm:flex sm:col-start-9 sm:col-end-13  justify-center items-center h-full max-h-70"
       ></img>
       <p
         className="row-start-2 row-end-3 col-start-2 col-end-12 items-center p-6 
