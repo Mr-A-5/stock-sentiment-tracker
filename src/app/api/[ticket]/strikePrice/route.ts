@@ -89,8 +89,9 @@ export async function GET(
   { params }: { params: Promise<{ ticket: string }> },
 ) {
   const authHeader = request.headers.get("authorization");
+  const isVercelCron = request.headers.get("x-vercel-cron");
 
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}` && !isVercelCron) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const { ticket } = await params;
