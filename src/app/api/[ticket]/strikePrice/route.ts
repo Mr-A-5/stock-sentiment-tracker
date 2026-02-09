@@ -88,12 +88,12 @@ export async function GET(
   request: Request,
   { params }: { params: Promise<{ ticket: string }> },
 ) {
-  const authHeader = request.headers.get("authorization");
-  const isVercelCron = request.headers.get("x-vercel-cron");
+  // const authHeader = request.headers.get("authorization");
+  // const isVercelCron = request.headers.get("x-vercel-cron");
 
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}` && !isVercelCron) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  // if (authHeader !== `Bearer ${process.env.CRON_SECRET}` && !isVercelCron) {
+  //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  // }
   const { ticket } = await params;
 
   const { data: companyID, error: idError } = await supabaseClient

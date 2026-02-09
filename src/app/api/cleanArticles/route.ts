@@ -9,13 +9,13 @@ function getYesterdaysDate() {
 }
 
 export async function GET(request: Request) {
-  const authHeader = request.headers.get("authorization");
+  // const authHeader = request.headers.get("authorization");
 
-  const isVercelCron = request.headers.get("x-vercel-cron");
+  // const isVercelCron = request.headers.get("x-vercel-cron");
 
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}` && !isVercelCron) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  // if (authHeader !== `Bearer ${process.env.CRON_SECRET}` && !isVercelCron) {
+  //   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  // }
   const yesterdayDate = getYesterdaysDate();
 
   const { data, error } = await supabaseClient
