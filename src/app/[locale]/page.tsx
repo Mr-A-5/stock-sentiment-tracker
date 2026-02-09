@@ -42,7 +42,7 @@ export default async function Home({ params }: PageProps) {
         <HomePageButtons locale={locale} />
       </div>
       <img
-        src="/images/bull.png"
+        src="/images/Bull.png"
         alt="Bull icon"
         className="hidden sm:flex sm:col-start-9 sm:col-end-13  justify-center items-center h-full max-h-70"
       ></img>
